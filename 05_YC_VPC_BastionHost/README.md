@@ -1,21 +1,35 @@
 
-# 5 VPC + Bastion host
+# 5 VPC + Bastion host + HTTPS cert
 
-1. Create bastion host.
+## 1. Create bastion host
+
+## 2. Create internal instance without external IP in the same VPC
+
+## 3. Connect to internal instance via bastion host
+
+## 4. Install VPN in Bastion host
+
+## 5. Create certificate for HTTPS connection
+
+### 1. Create bastion host
+
 ![Bastion host](./img/Screenshot_1.jpg)
 
-2. Test connection via ssh.
+Test connection via ssh
+
 ![Connection to Bastion host](./img/Screenshot_2.jpg)
 
-3. Create instance without external IP.
+### 2. Create instance without external IP
+
 ![Some internal host](./img/Screenshot_3.jpg)
 
-4. Connect to Internal host via Bastion host.
+### 3. Connect to Internal host via Bastion host
+
 ![Add bastion host's params and creds](./img/Screenshot_4.jpg)
 ![Add internal host creds](./img/Screenshot_5.jpg)
 ![Connection to internal host](./img/Screenshot_6.jpg)
 
-5. Install vpn in bastion host
+### 4. Install vpn in bastion host
 
 ```bash
 cat ./setupvpn.sh
@@ -72,7 +86,7 @@ sudo pritunl default-password
 Copy password from output and paste it to the form.
 ![Login and password](./img/Screenshot_8.jpg)
 
-## Install SSL certificate
+### 5. Install SSL certificate
 
 ```bash
 sudo apt-get install snapd
@@ -133,7 +147,9 @@ sudo systemctl start pritunl
 ```
 
 Add URL to server.
+
 ![IP.sslip.io](./img/Screenshot_9.jpg)
 
 Check **trusted** connection.
+
 ![Trusted connection](./img/Screenshot_10.jpg)
