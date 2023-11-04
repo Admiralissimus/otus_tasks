@@ -69,6 +69,9 @@ sudo pritunl setup-key
 sudo pritunl default-password
 ```
 
+Copy password from output and paste it to the form.
+![Login and password](./img/Screenshot_8.jpg)
+
 ## Install SSL certificate
 
 ```bash
@@ -130,3 +133,7 @@ sudo systemctl start pritunl
 ```
 
 Add URL to server.
+![IP.sslip.io](./img/Screenshot_9.jpg)
+
+Check **trusted** connection.
+![Trusted connection](./img/Screenshot_10.jpg)
