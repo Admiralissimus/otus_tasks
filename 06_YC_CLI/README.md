@@ -140,14 +140,15 @@ runcmd:
  - NEEDRESTART_MODE=a apt install --assume-yes ruby-full ruby-bundler build-essential 
  - NEEDRESTART_MODE=a apt install --assume-yes gnupg curl
  - curl -fsSL https://pgp.mongodb.com/server-7.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
- - echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" >> /etc/apt/sources.list.d/mongodb-org-7.0.list
+ - echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-7.0.list
  - apt update
- - NEEDRESTART_MODE=a apt install --assume-yes mongodb-
+ - DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt install --assume-yes mongodb-org
  - systemctl start mongod
  - systemctl enable mongod
 ```
 
 **NEEDRESTART_MODE=a** uses for disabling dialog during installation.
 ![Restart services](./img/Screenshot_1.jpg)
+**DEBIAN_FRONTEND=noninteractive** is for disabling other questions during installation.
 
 ### Deploy test app
