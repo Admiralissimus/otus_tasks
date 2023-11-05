@@ -2,25 +2,25 @@
     "builders": [
         {
             "type": "yandex",
+            "zone": "ru-central1-a",
             "folder_id": "b1g6mmcu4pmqf10ge9g2",
-            "source_image_id": "fd80bm0rh4rkepi5ksdi",
-            "image_name": "my_ubuntu_2204-{{timestamp}}",
+            "source_image_family": "ubuntu-2204-lts",
+            "image_name": "my-ubuntu-2204-{{timestamp}}",
             "image_description": "My ubuntu image created by packer",
             "use_ipv4_nat": true,
-            "ssh_username": "admiral"
+            "ssh_username": "ubuntu"
         }
     ],
     "provisioners": [
         {
             "type": "shell",
-            "inline": [
-                "echo 'updating APT'",
-                "sudo apt-get update -y",
-                "sudo apt-get install -y nginx",
-                "sudo su -",
-                "sudo systemctl enable nginx.service",
-                "curl localhost"
-            ]
+            "script": "scripts/install_ruby.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_mongodb.sh",
+            "execute_command": "sudo {{.Path}}"
         }
     ]
 }
