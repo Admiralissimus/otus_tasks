@@ -1,0 +1,12 @@
+#cloud-config
+runcmd:
+ - sudo sed -i "s/#$nrconf{restart} = 'i';/$nrconf{restart} = 'l';/" /etc/needrestart/needrestart.conf
+ - apt update
+ - DEBIAN_FRONTEND=noninteractive apt install --assume-yes ruby-full ruby-bundler build-essential
+ - DEBIAN_FRONTEND=noninteractive apt install --assume-yes gnupg curl
+ - curl -fsSL https://pgp.mongodb.com/server-7.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
+ - echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" >> /etc/apt/sources.list.d/mongodb-org-7.0.list
+ - apt update
+ - DEBIAN_FRONTEND=noninteractive apt install --assume-yes mongodb-
+ - systemctl start mongod
+ - systemctl enable mongod
