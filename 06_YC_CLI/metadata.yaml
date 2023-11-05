@@ -1,4 +1,12 @@
 #cloud-config
+users:
+  - name: admiral
+    groups: sudo
+    shell: /bin/bash
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWBMo37IsVyvy0aT8FMO7NiFPIxfrUCyp5BA4b4Pr69BahfFuTgHLzkmPz9N0DE7EAHgjTV0QSLAYHWrmJG/8H8K/x9kz9sIK03jySSib+hIpnMdtt4+rC6AiQI9lmYyXeaZPwAaZe+KOozNJvzutRd31vrFJ3VZUQ2rMgNC2x0SyF1kEle/zEwkNMW4E0ea07u6MXrv5aSGyFNakiqpxVO12MQE/UocgiloHurcWP4CSCygdjLre031LwQ80xIIbSslyYG/g8W6DVexOBMyJ5tbw+C0SETBb6d4pA1slrALybQOgD/DWaPtV2aiZJl5ch8GtdjqBtCc2JO9+uJzM3 rsa-key-20230411
+
 runcmd:
  - apt update
  - NEEDRESTART_MODE=a apt install --assume-yes ruby-full ruby-bundler build-essential 
