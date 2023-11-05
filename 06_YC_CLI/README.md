@@ -7,7 +7,7 @@
 
 ## 3. Deploy test app
 
-### Create instance using yc app
+## Create instance using yc app
 
 ```bash
 yc compute instance create --help
@@ -126,7 +126,7 @@ network_settings:
 placement_policy: {}
 ```
 
-### Install Ruby and MongoDB
+## Install Ruby and MongoDB
 
 For installation of Ruby and MongoDB use **metadata.yaml**. For more information read about [cloud init](https://cloudinit.readthedocs.io/en/latest/reference/examples.html).
 
@@ -156,10 +156,12 @@ runcmd:
 ```
 
 **NEEDRESTART_MODE=a** uses for disabling dialog during installation.
+
 ![Restart services](./img/Screenshot_1.jpg)
+
 **DEBIAN_FRONTEND=noninteractive** is for disabling other questions during installation.
 
-#### Check installed apps
+**Check installed apps**:
 
 ```bash
 admiral@fhm6onfqbmmu8049fbm7:~$ ruby -v
@@ -179,4 +181,14 @@ admiral@fhm6onfqbmmu8049fbm7:~$ systemctl status mongod
 
 ```
 
-### Deploy test app
+## Deploy test app
+
+```bash
+cd ~
+git clone -b monolith https://github.com/admiralissimus/reddit.git
+cd reddit && bundle install
+puma -d
+```
+
+Check connection:  
+![Puma service](./img/Screenshot_2.jpg)
