@@ -25,7 +25,7 @@ packer -v
 
 - Create a **config.pkr.hcl** file with the following contents:
 
-```json
+```hcl
 packer {
   required_plugins {
     yandex = {
