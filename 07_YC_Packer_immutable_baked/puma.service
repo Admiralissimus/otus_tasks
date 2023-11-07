@@ -1,13 +1,13 @@
 [Unit]
-Description=Puma server
+Description=Puma HTTP Server
 After=network.target
 
 [Service]
+Type=simple
 User=puma
-ExecStart=/usr/local/bin/puma
+ExecStart=/bin/bash -lc '/usr/local/bin/puma'
 WorkingDirectory=/var/puma/reddit
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
-
