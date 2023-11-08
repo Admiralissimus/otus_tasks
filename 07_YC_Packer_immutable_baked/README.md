@@ -144,7 +144,8 @@ ubuntu.json
             "image_name": "my-ubuntu-1604-{{timestamp}}",
             "image_description": "My ubuntu image created by packer",
             "use_ipv4_nat": true,
-            "ssh_username": "ubuntu"
+            "ssh_username": "ubuntu",
+            "disk_size_gb": 3
         }
     ],
     "provisioners": [
@@ -162,10 +163,6 @@ ubuntu.json
             "type": "file",
             "source": "puma.service",
             "destination": "/tmp/puma.service"
-        },
-        {
-            "type": "shell",
-            "inline": "sudo mv /tmp/puma.service /etc/systemd/system/puma.service && sudo chown root:root /etc/systemd/system/puma.service"
         },
         {
             "type": "shell",

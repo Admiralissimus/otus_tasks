@@ -21,6 +21,10 @@ provider "yandex" {
 ```
 
 ```bash
+$ export YC_TOKEN=$(yc iam create-token)
+$ export YC_CLOUD_ID=$(yc config get cloud-id)
+$ export YC_FOLDER_ID=$(yc config get folder-id)
+
 $ terraform init
 
 Initializing the backend...
@@ -41,4 +45,18 @@ should now work.
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
+```
+
+Yandex token will be used by environment variable **YC_TOKEN**.
+
+```bash
+export YC_TOKEN=xxxxxxxxxxx
+```
+
+Create image with **Ubuntu + ruby + mongodb** using packer and scripts from 07_YC task.
+
+ubuntu_ruby_mongodb.json
+
+```json
+
 ```

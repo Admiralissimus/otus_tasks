@@ -1,0 +1,28 @@
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "zone": "ru-central1-a",
+            "folder_id": "b1grlgcpgp7enm4j8knb",
+            "source_image_family": "ubuntu-1604-lts",
+            "image_name": "ubuntu-1604-ruby-mongodb-{{isotime | clean_resource_name}}",
+            "image_family": "ubuntu-1604-ruby-mongodb",
+            "image_description": "Ubuntu 16.04 with ruby and mongodb.",
+            "use_ipv4_nat": true,
+            "ssh_username": "ubuntu",
+            "disk_size_gb": 3
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "07_YC_Packer_immutable_baked/scripts/install_mongodb.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "07_YC_Packer_immutable_baked/scripts/install_ruby.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
