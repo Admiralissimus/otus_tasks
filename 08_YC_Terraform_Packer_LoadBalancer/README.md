@@ -2,28 +2,43 @@
 
 ## Create load balancer and 2 instances using terraform
 
-### 1. Create 2 different images
+### 1. Initialize terraform
 
-Create 2 images with small change (I changed main page a little bit) using 07_YC task.
+Create **provider.tf** file
 
-```bash
-$ cd 07_YC_Packer_immutable_baked
-$ packer build ubuntu.json
+```hcl
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+}
 
-....
-
-==> Builds finished. The artifacts of successful builds are:
---> yandex: A disk image was created: my-ubuntu-1604-1699377852 (id: fd8vbfopbn5slc6lrmdd) with family name 
+provider "yandex" {
+  zone = "var.az_default"
+}
 ```
 
-Commit some change in repo and make the second image.
-
 ```bash
-$ cd 07_YC_Packer_immutable_baked
-$ packer build ubuntu.json
+$ terraform init
 
-....
+Initializing the backend...
 
-==> Builds finished. The artifacts of successful builds are:
---> yandex: A disk image was created: my-ubuntu-1604-1699380360 (id: fd8taktntenhsiboe8jb) with family name 
+Initializing provider plugins...
+- Finding latest version of yandex-cloud/yandex...
+- Installing yandex-cloud/yandex v0.102.0...
+- Installed yandex-cloud/yandex v0.102.0 (unauthenticated)
+
+...
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
 ```
