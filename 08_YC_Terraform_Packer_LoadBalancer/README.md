@@ -58,5 +58,77 @@ Create image with **Ubuntu + ruby + mongodb** using packer and scripts from 07_Y
 ubuntu_ruby_mongodb.json
 
 ```json
+{
+    "builders": [
+        {
+            "type": "yandex",
+            "zone": "ru-central1-a",
+            "folder_id": "b1grlgcpgp7enm4j8knb",
+            "source_image_family": "ubuntu-1604-lts",
+            "image_name": "ubuntu-1604-ruby-mongodb-{{isotime | clean_resource_name}}",
+            "image_family": "ubuntu-1604-ruby-mongodb",
+            "image_description": "Ubuntu 16.04 with ruby and mongodb.",
+            "use_ipv4_nat": true,
+            "ssh_username": "ubuntu",
+            "disk_size_gb": 3
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "07_YC_Packer_immutable_baked/scripts/install_mongodb.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "07_YC_Packer_immutable_baked/scripts/install_ruby.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
+```
+
+```bash
+$ packer validate ubuntu_ruby_mongodb.json 
+The configuration is valid.
+
+$ packer build ubuntu_ruby_mongodb.json 
+yandex: output will be in this color.
+
+==> yandex: Creating temporary RSA SSH key for instance...
+==> yandex: Using as source image: fd842allqn7fhfrorfao (name: "ubuntu-16-04-lts-v20231106", family: "ubuntu-1604-lts")
+==> yandex: Creating network...
+==> yandex: Creating subnet in zone "ru-central1-a"...
+==> yandex: Creating disk...
+==> yandex: Creating instance...
+
+...
+
+Build 'yandex' finished after 4 minutes 36 seconds.
+
+==> Wait completed after 4 minutes 36 seconds
+
+==> Builds finished. The artifacts of successful builds are:
+--> yandex: A disk image was created: ubuntu-1604-ruby-mongodb-2023-11-08t17-51-10z (id: fd8aal63tn4cmd928ksm) with family name ubuntu-1604-ruby-mongodb
+```
+
+Add datasource with the latest image_id to provider.tf:
+
+```hcl
+data "yandex_compute_image" "ubuntu_ruby_mongodb_image" {
+  family    = "ubuntu-1604-ruby-mongodb"
+  folder_id = var.folder_id
+}
+```
+
+```bash
+$ terraform plan
+data.yandex_compute_image.ubuntu_ruby_mongodb_image: Reading...
+data.yandex_compute_image.ubuntu_ruby_mongodb_image: Read complete after 7s [id=fd8aal63tn4cmd928ksm]
+
+Changes to Outputs:
+  + image_id = "fd8aal63tn4cmd928ksm"
 
 ```
+
+As we see, ids after **yc** and **terraform** commands are the same.
