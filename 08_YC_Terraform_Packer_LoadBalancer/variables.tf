@@ -9,3 +9,16 @@ variable "folder_id" {
   type        = string
   default     = "b1grlgcpgp7enm4j8knb"
 }
+
+variable "platform_id" {
+  description = "Type if instances"
+  type        = string
+  default     = "standard-v2"
+}
+
+variable "owner" {
+  description = "Owner in labels"
+  type        = string
+  default     = "ushakou"
+}
+

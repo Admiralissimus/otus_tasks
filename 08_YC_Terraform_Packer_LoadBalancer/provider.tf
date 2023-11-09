@@ -7,10 +7,7 @@ terraform {
 }
 
 provider "yandex" {
-  zone = "var.az_default"
-}
-
-data "yandex_compute_image" "ubuntu_ruby_mongodb_image" {
-  family    = "ubuntu-1604-ruby-mongodb"
+  zone      = var.az_default
   folder_id = var.folder_id
 }
+
