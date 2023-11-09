@@ -269,3 +269,10 @@ resource "yandex_lb_network_load_balancer" "otus_lb" {
   }
 }
 ```
+
+![Load Balancer](./img/Screenshot_1.jpg)
+
+Check working in different browsers:
+
+![Monolith Reddit](./img/Screenshot_2.jpg)
+![Monolith Reddit Admiral](./img/Screenshot_3.jpg)
